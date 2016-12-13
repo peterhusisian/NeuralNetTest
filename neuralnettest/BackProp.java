@@ -41,6 +41,18 @@ public class BackProp {
         return error;
     }
     
+    public void backPropagateUntilCostIsBelowPercent(Input input, double errorPercent, int maxIterations){//maxIterations so that it doesn't loop forever
+        double maxError = 0.5 * neuronLayers.getTopLayer().getNeurons().size();
+        int count = 0;
+        while(getCost(input)/maxError > errorPercent && count < maxIterations){
+            
+            backPropagate(input);
+            count++;
+        }
+        
+        
+    }
+    
     public void backPropagate(Input input){
         input.calculateInput();
         double[] gradient = getGradient(input);

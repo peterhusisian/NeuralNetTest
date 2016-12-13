@@ -68,7 +68,7 @@ public class Panel extends JPanel implements ActionListener
         }else if(e.getActionCommand().equals("funcButton")){
             nls.chooseNewInput();
         }else if(e.getActionCommand().equals("backProp")){
-            nls.backPropagate();
+            nls.toggleBackProp();
         }
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

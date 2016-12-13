@@ -13,11 +13,12 @@ public class NeuronLayers implements Drawable
     private BiasNeuron bias = new BiasNeuron(this);
     private Input input;
     private BackProp backProp;
+    private boolean doBackProp = false;
     BinaryFunction binaryFunction;
     private ArrayList<Link> links = new ArrayList<Link>();
     public NeuronLayers(){
-        addBlankNeuronLayers(3);
-        //addRandomNeuronLayers(3, 5);
+        //addBlankNeuronLayers(3);
+        addRandomNeuronLayers(10, 15);
         setLayersDrawY();
         initNetNeuronLinks();
         bias.initNeuronLinks();
@@ -30,8 +31,12 @@ public class NeuronLayers implements Drawable
         //input = Input.instantiateWithRandomInputsAndOutputs(this);
     }
     
+    public void toggleBackProp(){
+        doBackProp = !doBackProp;
+    }
+    
     public void backPropagate(){
-        backProp.backPropagate(input);
+        backProp.backPropagateUntilCostIsBelowPercent(input, .1, 200);
     }
     
     public ArrayList<Link> getLinks(){
@@ -141,6 +146,9 @@ public class NeuronLayers implements Drawable
     
     @Override
     public void draw(Graphics g) {
+        if(doBackProp){
+            backProp.backPropagate(input);
+        }
         bias.draw(g);
         for(NeuronLayer nl : neuronLayers){
             nl.draw(g);

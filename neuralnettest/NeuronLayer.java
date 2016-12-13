@@ -19,7 +19,7 @@ public class NeuronLayer implements Drawable
         boundLayers = boundLayersIn;
         layerNum = layerNumIn;
         //addNeurons(1);
-        addRandomNeurons(3, 5);
+        addRandomNeurons(12, 15);
         setNeuronDrawPositions();
     }
     
